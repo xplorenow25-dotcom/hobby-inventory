@@ -1,0 +1,331 @@
+/* --- Core Styling & Reset --- */
+:root {
+    --bg-dark: #121212;
+    --bg-card: #1e1e1e;
+    --text-primary: #f2f2f2;
+    --text-secondary: #aaaaaa;
+    --accent-purple: #8143d3;
+    --accent-cyan: #22d3ee;
+    --color-positive: #22c55e;
+    
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --border-radius: 18px;
+    --transition: 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #333333; /* Dark gray page background */
+    font-family: var(--font-family);
+    color: var(--text-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* --- Phone Container (To simulate the mobile screen) --- */
+.phone-container {
+    width: 375px; /* iPhone X width */
+    height: 812px; /* iPhone X height */
+    background-color: var(--bg-dark);
+    border-radius: 40px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+    overflow: hidden;
+    position: relative;
+    border: 10px solid #111111; /* Bezel */
+}
+
+/* --- App Content Wrapper --- */
+.app-screen {
+    padding: 20px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- Header Section --- */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.user-greeting h1 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.current-date {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.profile-pic {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover; /* Important: prevents stretching */
+    border: 2px solid #ffffff;
+}
+
+/* --- Portfolio Card Section --- */
+.portfolio-card {
+    background: linear-gradient(135deg, #222222 0%, #1e1e1e 100%);
+    border-radius: 24px;
+    padding: 20px;
+    margin-bottom: 25px;
+    border: 1px solid #2a2a2a;
+}
+
+.portfolio-title {
+    font-size: 14px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+
+.portfolio-value-container {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 15px;
+}
+
+.currency {
+    font-size: 24px;
+    font-weight: 700;
+    margin-right: 5px;
+}
+
+.value {
+    font-size: 44px;
+    font-weight: 800;
+    margin-right: 15px;
+}
+
+.value-change {
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.change-positive {
+    color: var(--color-positive);
+}
+
+.fa-arrow-up {
+    margin-right: 5px;
+    font-size: 14px;
+}
+
+/* Graph Placeholder */
+.portfolio-graph {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    height: 5px;
+}
+
+.graph-bar {
+    height: 100%;
+    border-radius: 5px;
+    background-color: #2a2a2a;
+}
+
+.bar-1 { width: 30%; background-color: var(--accent-cyan); }
+.bar-2 { width: 45%; background-color: var(--accent-purple); }
+.bar-3 { width: 15%; background-color: var(--color-positive); }
+
+/* Card Buttons */
+.card-actions {
+    display: flex;
+    gap: 15px;
+}
+
+.btn {
+    flex: 1;
+    padding: 14px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-primary {
+    border: 2px solid var(--accent-purple);
+}
+
+.btn-solid {
+    background-color: var(--accent-purple);
+    color: #ffffff;
+}
+
+.btn-solid:hover {
+    background-color: #925ce0;
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--text-primary);
+}
+
+.btn-outline:hover {
+    background-color: rgba(129, 67, 211, 0.1);
+}
+
+/* --- Category Filter Section --- */
+.category-filter {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.filter-pill {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    background-color: var(--bg-card);
+    border-radius: var(--border-radius);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: var(--transition);
+    height: 70px; /* Uniform height */
+}
+
+.filter-pill:hover {
+    background-color: #2a2a2a;
+    color: var(--text-primary);
+}
+
+.pill-active {
+    background-color: var(--accent-purple);
+    color: #ffffff;
+}
+
+.pill-active:hover {
+    background-color: var(--accent-purple);
+    color: #ffffff;
+}
+
+.pill-icon {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: var(--accent-cyan); /* Active and default icon color */
+}
+
+.pill-active .pill-icon {
+    color: #ffffff; /* Active pill text white */
+}
+
+/* --- Recent Additions Section --- */
+.recent-additions h2 {
+    font-size: 14px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+.additions-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+/* Item Card */
+.item-card {
+    background-color: var(--bg-card);
+    border-radius: var(--border-radius);
+    padding: 12px;
+    transition: var(--transition);
+    border: 1px solid #2a2a2a;
+}
+
+.item-card:hover {
+    transform: translateY(-5px);
+    border-color: #3a3a3a;
+}
+
+.item-image-container {
+    width: 100%;
+    height: 140px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.item-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.pet-image {
+    object-fit: contain; /* Prevents Pet stretching */
+}
+
+.item-details h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.item-price {
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 5px;
+}
+
+.item-date {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+/* --- Bottom Navigation --- */
+.bottom-nav {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--bg-dark);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+    border-top: 2px solid #2a2a2a;
+}
+
+.nav-item {
+    color: var(--text-secondary);
+    transition: var(--transition);
+}
+
+.nav-icon {
+    font-size: 22px;
+}
+
+.nav-active .nav-icon {
+    color: var(--accent-purple);
+}
+
+.nav-item:hover {
+    color: var(--text-primary);
+}
+
+/* --- Global Utilities --- */
+.accent-cyan {
+    color: var(--accent-cyan);
+}
