@@ -371,3 +371,9 @@ body {
     color: var(--text-secondary);
     opacity: 0.6;
 }
+
+.nav-active .nav-icon {
+    color: var(--accent-purple);
+    text-shadow: 0 0 10px rgba(129, 67, 211, 0.5);
+    transform: scale(1.1);
+}
