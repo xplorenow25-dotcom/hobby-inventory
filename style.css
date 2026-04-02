@@ -245,54 +245,87 @@ body {
     gap: 15px;
 }
 
-/* Item Card */
+/* --- Updated Item Card Grid Container --- */
+.additions-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two cards side-by-side */
+    gap: 16px; /* Space between cards */
+    padding-bottom: 80px; /* Space for bottom nav */
+}
+
+/* --- The Individual Item Card --- */
 .item-card {
     background-color: var(--bg-card);
     border-radius: var(--border-radius);
     padding: 12px;
-    transition: var(--transition);
-    border: 1px solid #2a2a2a;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Ensures all cards in a row match height */
+    transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
 .item-card:hover {
-    transform: translateY(-5px);
-    border-color: #3a3a3a;
+    transform: translateY(-4px);
+    border-color: var(--accent-purple);
 }
 
+/* --- Image Container --- */
 .item-image-container {
     width: 100%;
-    height: 140px;
+    aspect-ratio: 1 / 1; /* Makes the image area a perfect square */
+    background: #ffffff; /* Contrast for sneakers/consoles */
+    border-radius: 14px;
     margin-bottom: 12px;
     overflow: hidden;
-    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .item-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    width: 90%; /* Slight padding inside the white box */
+    height: auto;
+    object-fit: contain;
 }
 
-.pet-image {
-    object-fit: contain; /* Prevents Pet stretching */
+/* --- Text Details (The Fix) --- */
+.item-details {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Pushes the date to the very bottom */
 }
 
 .item-details h3 {
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 5px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+    line-height: 1.3;
+    
+    /* WESTERN STYLE: Line Clamping */
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Shows 2 lines, then '...' */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .item-price {
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 800;
-    margin-bottom: 5px;
+    color: var(--text-primary);
+    margin-bottom: 8px;
 }
 
 .item-date {
-    font-size: 12px;
+    font-size: 11px;
     color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: auto; /* Forces date to stay at the bottom of the card */
 }
+
 
 /* --- Bottom Navigation --- */
 .bottom-nav {
