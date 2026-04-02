@@ -133,6 +133,29 @@
                 <i class="fas fa-user-circle nav-icon"></i>
             </a>
         </footer>
+        <div id="addModal" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Add to Vault</h2>
+            <button onclick="closeModal()" class="close-btn">&times;</button>
+        </div>
+        
+        <div class="add-options">
+            <button class="option-card pulse-animation">
+                <i class="fas fa-camera"></i>
+                <span>Smart Scan</span>
+                <p>AI identifies item & price</p>
+            </button>
+            
+            <button class="option-card" onclick="showManualForm()">
+                <i class="fas fa-pen"></i>
+                <span>Manual Entry</span>
+                <p>Type details yourself</p>
+            </button>
+        </div>
+    </div>
+</div>
+
               <script src="script.js"></script>
     </div> </body>
 </html>
