@@ -2,160 +2,147 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hobby Vault UI Mockup</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>DirtMath Pro</title>
+    <!-- Link to CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- jsPDF for Advanced PDF Generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <!-- Link to JS (defer ensures it loads after HTML) -->
+    <script src="script.js" defer></script>
 </head>
 <body>
 
-    <div class="phone-container">
-        
-        <div class="app-screen">
-            
-            <header class="app-header">
-                <div class="user-greeting">
-                    <h1>Welcome back, <span class="accent-cyan">Alex!</span></h1>
-                    <p class="current-date">October 12, 2025</p>
-                </div>
-                <img src="profile_pic.png" alt="Profile Picture" class="profile-pic">
-            </header>
-
-            <div class="search-container">
-    <div class="search-wrapper">
-        <i class="fas fa-search search-icon"></i>
-        <input type="text" id="searchInput" placeholder="Search your vault..." class="search-bar-input">
+    <!-- ANIMATED GLASSMORPHISM BACKGROUND -->
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
     </div>
-</div>
-            <div class="portfolio-card">
-                <div class="card-content">
-                    <p class="portfolio-title">Overall Portfolio Value</p>
-                    <div class="portfolio-value-container">
-                        <span class="currency">$</span>
-                        <span class="value">15,750.00</span>
-                        <div class="value-change change-positive">
-                            <i class="fas fa-arrow-up"></i>
-                            <span class="change-percent">3.2%</span>
-                        </div>
-                    </div>
-                    <div class="portfolio-graph">
-                        <div class="graph-bar bar-1"></div>
-                        <div class="graph-bar bar-2"></div>
-                        <div class="graph-bar bar-3"></div>
-                    </div>
-                    <div class="card-actions">
-                        <button class="btn btn-primary btn-solid">Add Item</button>
-                        <button class="btn btn-primary btn-outline">Scan Receipt</button>
-                    </div>
-                </div>
+
+    <!-- TOP BAR -->
+    <header class="top-bar glass">
+        <div class="header-left">
+            <button class="btn-icon" id="btn-back" style="display:none;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></button>
+            <h1 id="app-title">Dirt<span>Math</span><span class="pro-badge" id="pro-badge">PRO</span></h1>
+        </div>
+        <div class="header-left">
+            <div class="unit-toggle" id="unit-toggle-box"><button id="btn-metric">Metric</button><button id="btn-imperial" class="active">Imperial</button></div>
+            <button class="btn-icon" id="btn-settings"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></button>
+        </div>
+    </header>
+
+    <!-- PAYWALL MODAL -->
+    <div id="paywall-modal" class="modal-overlay">
+        <div class="modal-box glass" style="border-color:rgba(245, 166, 35, 0.5);">
+            <h3 style="font-size:1.5rem; text-align:center;">🛑 DirtMath PRO</h3>
+            <p id="paywall-msg" style="text-align:center; color:#fff; font-weight:bold; margin-bottom:5px;">This is a Pro Tool.</p>
+            <p style="text-align:center; margin-bottom:20px;">Stop arguing with clients over materials. Upgrade once, own it forever.</p>
+            <ul style="color:var(--text-muted); font-size:0.9rem; line-height:1.6; margin-bottom:20px; padding-left:20px;">
+                <li>Unlimited PDF Estimates (Branded)</li>
+                <li>Unlimited History Logging</li>
+                <li>Unlock all 4 Pro Calculators</li>
+                <li>No Ads. Ever.</li>
+            </ul>
+            <button class="btn-action primary" id="btn-test-unlock" style="width:100%; font-size:1.2rem;">Unlock PRO - $14.99</button>
+            <button class="btn-action" id="btn-close-paywall" style="width:100%; margin-top:10px; background:transparent; border:none;">Cancel</button>
+        </div>
+    </div>
+
+    <!-- PROJECT NAME MODAL -->
+    <div id="project-modal" class="modal-overlay">
+        <div class="modal-box glass">
+            <h3>Project Details</h3>
+            <p>Enter a title for this calculation so it looks professional on the PDF and History log.</p>
+            <input type="text" id="modal-proj-name" placeholder="e.g. Main St. Driveway" style="margin-bottom:20px;">
+            <div style="display:flex; gap:10px;">
+                <button class="btn-action" id="btn-close-modal">Cancel</button>
+                <button class="btn-action primary" id="btn-confirm-modal">Confirm</button>
             </div>
-
-            <nav class="category-filter">
-                <button class="filter-pill pill-active">
-                    <i class="fas fa-layer-group pill-icon"></i>
-                    All (52)
-                </button>
-                <button class="filter-pill">
-                    <i class="fas fa-shoe-prints pill-icon"></i>
-                    Shoes (18)
-                </button>
-                <button class="filter-pill">
-                    <i class="fas fa-gamepad pill-icon"></i>
-                    Games (15)
-                </button>
-                <button class="filter-pill">
-                    <i class="fas fa-paw pill-icon"></i>
-                    Pets (2)
-                </button>
-            </nav>
-
-            <section class="recent-additions">
-                <h2>RECENT ADDITIONS</h2>
-                <div class="additions-grid">
-                    
-                    <div class="item-card">
-                        <div class="item-image-container">
-                            <img src="image2.png" alt="Nike Jordan 1 Retro" class="item-image">
-                        </div>
-                        <div class="item-details">
-                            <h3>Nike Jordan 1 Retro</h3>
-                            <p class="item-price">$450.00</p>
-                            <p class="item-date">Purchased Oct '25</p>
-                        </div>
-                    </div>
-
-                    <div class="item-card">
-                        <div class="item-image-container">
-                            <img src="image1.jpg" alt="PS5 Console" class="item-image">
-                        </div>
-                        <div class="item-details">
-                            <h3>PS5 Console</h3>
-                            <p class="item-price">$500.00</p>
-                            <p class="item-date">Purchased Nov '25</p>
-                        </div>
-                    </div>
-
-                    <div class="item-card">
-                        <div class="item-image-container">
-                            <img src="image3.png" alt="Simba the Dog" class="item-image pet-image">
-                        </div>
-                        <div class="item-details">
-                            <h3>Simba</h3>
-                            <p class="item-price">Age: 2 yrs</p>
-                            <p class="item-date">&nbsp;</p> </div>
-                    </div>
-
-                    <div class="item-card">
-                        <div class="item-image-container">
-                            <img src="image4.png" alt="Vintage Vinyl Record" class="item-image">
-                        </div>
-                        <div class="item-details">
-                            <h3>Vintage Vinyl Record</h3>
-                            <p class="item-price">$120.00</p>
-                            <p class="item-date">Purchased Dec '25</p>
-                        </div>
-                    </div>
-
-                </div>
-            </section>
-
-        </div> <footer class="bottom-nav">
-            <a href="#" class="nav-item nav-active">
-                <i class="fas fa-home nav-icon"></i>
-            </a>
-            <a href="#" class="nav-item">
-                <i class="fas fa-search nav-icon"></i>
-            </a>
-            <a href="#" class="nav-item">
-                <i class="fas fa-chart-line nav-icon"></i>
-            </a>
-            <a href="#" class="nav-item">
-                <i class="fas fa-user-circle nav-icon"></i>
-            </a>
-        </footer>
-        <div id="addModal" class="modal-overlay">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h2>Add to Vault</h2>
-            <button onclick="closeModal()" class="close-btn">&times;</button>
-        </div>
-        
-        <div class="add-options">
-            <button class="option-card pulse-animation">
-                <i class="fas fa-camera"></i>
-                <span>Smart Scan</span>
-                <p>AI identifies item & price</p>
-            </button>
-            
-            <button class="option-card" onclick="showManualForm()">
-                <i class="fas fa-pen"></i>
-                <span>Manual Entry</span>
-                <p>Type details yourself</p>
-            </button>
         </div>
     </div>
-</div>
 
-              <script src="script.js"></script>
-    </div> </body>
+    <!-- VIEW 1: HOME MENU -->
+    <div id="view-home" class="view active">
+        <div class="category-title">A. Excavator's Toolkit</div>
+        <div class="menu-grid">
+            <button class="btn-menu locked glass" data-calc="prod" data-name="Productivity">1. Productivity Calc <span>🔒</span></button>
+            <button class="btn-menu glass" data-calc="bucket" data-name="Bucket Capacity">2. Bucket Capacity <span>&#8250;</span></button>
+            <button class="btn-menu locked glass" data-calc="fuel" data-name="Fuel Cost Estimator">3. Fuel Cost Estimator <span>🔒</span></button>
+            <button class="btn-menu glass" data-calc="trench" data-name="Trench Volume">4. Trench Volume <span>&#8250;</span></button>
+        </div>
+
+        <div class="category-title">B. Concrete & Masonry</div>
+        <div class="menu-grid">
+            <button class="btn-menu glass" data-calc="slab" data-name="Slab & Driveway">5. Slab/Driveway Pour <span>&#8250;</span></button>
+            <button class="btn-menu locked glass" data-calc="curb" data-name="Curb & Gutter">6. Curb & Gutter <span>🔒</span></button>
+            <button class="btn-menu glass" data-calc="post" data-name="Post Hole / Footing">7. Post Hole / Footing <span>&#8250;</span></button>
+            <button class="btn-menu glass" data-calc="block" data-name="Brick & Block">8. Brick & Block Counter <span>&#8250;</span></button>
+        </div>
+
+        <div class="category-title">C. General Utility</div>
+        <div class="menu-grid">
+            <button class="btn-menu glass" data-calc="unit" data-name="Unit Converter">9. Unit Converter <span>&#8250;</span></button>
+            <button class="btn-menu glass" data-calc="weight" data-name="Material Weight">10. Material Weight <span>&#8250;</span></button>
+            <button class="btn-menu locked glass" data-calc="swell" data-name="Swell/Shrink Factor">11. Swell/Shrink Factor <span>🔒</span></button>
+        </div>
+    </div>
+
+    <!-- VIEW 3: SETTINGS -->
+    <div id="view-settings" class="view">
+        <div class="calc-form glass active" style="display:block;">
+            <h2 style="color:var(--brand-gold); margin-bottom:5px; font-size:1.5rem;">Pro Settings</h2>
+            <p style="color:var(--text-muted); margin-bottom:20px; font-size:0.9rem;">This info will appear at the top of your PDF Reports to look professional for clients.</p>
+            <div class="input-group"><label>Company Name</label><input type="text" id="set-company" placeholder="e.g. Apex Excavation"></div>
+            <div class="input-group"><label>Phone Number</label><input type="text" id="set-phone" placeholder="e.g. (555) 123-4567"></div>
+            <div class="input-group"><label>Email Address</label><input type="text" id="set-email" placeholder="e.g. info@apex.com"></div>
+            <button class="btn-action primary" id="btn-save-settings" style="width:100%; margin-top:10px;">Save Profile</button>
+        </div>
+        <div class="calc-form glass active" style="display:block; margin-top:20px;">
+            <h3 style="color:var(--text-main); margin-bottom:10px;">Developer Tools</h3>
+            <button class="btn-action" id="btn-reset-app" style="width:100%; border-color:rgba(255,50,50,0.5); color:#ff5555; background:rgba(255,0,0,0.1);">Reset App (Lock Pro)</button>
+        </div>
+    </div>
+
+    <!-- VIEW 2: CALCULATOR INTERFACE -->
+    <div id="view-calc" class="view">
+        <div class="results-board glass-gold"><h2 id="result-title">Result</h2><div class="results-output" id="primary-result">0.00</div><div class="results-sub" id="secondary-result">--</div></div>
+        
+        <!-- FORMS -->
+        <div id="form-prod" class="calc-form glass"><div class="input-group"><label>Bucket Cap <span class="unit-label lbl-vol"></span></label><input type="number" id="prod-cap" placeholder="e.g. 1.5"></div><div class="input-group"><label>Cycle Time (Sec)</label><input type="number" id="prod-cycle" placeholder="e.g. 20"></div><div class="input-group"><label>Efficiency</label><select id="prod-eff"><option value="1">100% Perfect</option><option value="0.8" selected>80% Standard</option><option value="0.6">60% Hard</option></select></div></div>
+        <div id="form-bucket" class="calc-form glass"><div class="input-group"><label>Inside Width <span class="unit-label lbl-small"></span></label><input type="number" id="buc-w" placeholder="e.g. 36"></div><div class="input-group"><label>Inside Length <span class="unit-label lbl-small"></span></label><input type="number" id="buc-l" placeholder="e.g. 30"></div><div class="input-group"><label>Inside Depth <span class="unit-label lbl-small"></span></label><input type="number" id="buc-d" placeholder="e.g. 24"></div></div>
+        <div id="form-fuel" class="calc-form glass"><div class="input-group"><label>Burn Rate <span class="unit-label lbl-liq-hr"></span></label><input type="number" id="fuel-rate" placeholder="e.g. 4"></div><div class="input-group"><label>Price per <span class="unit-label lbl-liq"></span></label><input type="number" id="fuel-price" placeholder="e.g. 3.50"></div><div class="input-group"><label>Hours Worked</label><input type="number" id="fuel-hrs" placeholder="e.g. 8"></div></div>
+        <div id="form-trench" class="calc-form glass"><div class="input-group"><label>Length <span class="unit-label lbl-len"></span></label><input type="number" id="tr-len" placeholder="e.g. 100"></div><div class="input-group"><label>Top Width <span class="unit-label lbl-len"></span></label><input type="number" id="tr-tw" placeholder="e.g. 4"></div><div class="input-group"><label>Bottom Width <span class="unit-label lbl-len"></span></label><input type="number" id="tr-bw" placeholder="e.g. 2"></div><div class="input-group"><label>Depth <span class="unit-label lbl-len"></span></label><input type="number" id="tr-dep" placeholder="e.g. 4"></div></div>
+        <div id="form-slab" class="calc-form glass"><div class="input-group"><label>Length <span class="unit-label lbl-len"></span></label><input type="number" id="sl-l" placeholder="e.g. 20"></div><div class="input-group"><label>Width <span class="unit-label lbl-len"></span></label><input type="number" id="sl-w" placeholder="e.g. 10"></div><div class="input-group"><label>Thickness <span class="unit-label lbl-small"></span></label><input type="number" id="sl-d" placeholder="e.g. 4"></div><div class="input-group"><label>Waste Buffer %</label><input type="number" id="sl-buf" placeholder="e.g. 10"></div></div>
+        <div id="form-curb" class="calc-form glass"><div class="input-group"><label>Total Length <span class="unit-label lbl-len"></span></label><input type="number" id="cu-l" placeholder="e.g. 50"></div><div class="input-group"><label>Curb Height <span class="unit-label lbl-small"></span></label><input type="number" id="cu-ch" placeholder="e.g. 6"></div><div class="input-group"><label>Curb Width <span class="unit-label lbl-small"></span></label><input type="number" id="cu-cw" placeholder="e.g. 6"></div><div class="input-group"><label>Gutter Width <span class="unit-label lbl-small"></span></label><input type="number" id="cu-gw" placeholder="e.g. 12"></div><div class="input-group"><label>Flag Thickness <span class="unit-label lbl-small"></span></label><input type="number" id="cu-ft" placeholder="e.g. 6"></div></div>
+        <div id="form-post" class="calc-form glass"><div class="input-group"><label>Hole Shape</label><select id="po-type"><option value="round">Round Cylinder</option><option value="square">Square Prism</option></select></div><div class="input-group"><label>Diameter/Width <span class="unit-label lbl-small"></span></label><input type="number" id="po-w" placeholder="e.g. 12"></div><div class="input-group"><label>Depth <span class="unit-label lbl-len"></span></label><input type="number" id="po-d" placeholder="e.g. 4"></div><div class="input-group"><label>Number of Holes</label><input type="number" id="po-qty" placeholder="e.g. 10"></div></div>
+        <div id="form-block" class="calc-form glass"><div class="input-group"><label>Wall Length <span class="unit-label lbl-len"></span></label><input type="number" id="bl-l" placeholder="e.g. 20"></div><div class="input-group"><label>Wall Height <span class="unit-label lbl-len"></span></label><input type="number" id="bl-h" placeholder="e.g. 6"></div><div class="input-group"><label>Block Type</label><select id="bl-type"><option value="cmu">Standard CMU (16x8in / 400x200mm)</option><option value="brick">Standard Brick</option></select></div></div>
+        <div id="form-unit" class="calc-form glass"><div class="input-group"><label>Convert Type</label><select id="un-type"><option value="len">Length (ft ↔ m)</option><option value="vol">Volume (yd³ ↔ m³)</option><option value="wt">Weight (lbs ↔ kg)</option></select></div><div class="input-group"><label>Input Value</label><input type="number" id="un-val" placeholder="e.g. 10"></div></div>
+        <div id="form-weight" class="calc-form glass"><div class="input-group"><label>Total Volume <span class="unit-label lbl-vol"></span></label><input type="number" id="wt-v" placeholder="e.g. 10"></div><div class="input-group"><label>Material Type</label><select id="wt-mat"><option value="1600">Dry Sand</option><option value="2000">Wet Sand / Gravel</option><option value="1200">Loose Topsoil</option><option value="2400">Solid Concrete</option></select></div></div>
+        <div id="form-swell" class="calc-form glass"><div class="input-group"><label>Bank/Dug Volume <span class="unit-label lbl-vol"></span></label><input type="number" id="sw-v" placeholder="e.g. 100"></div><div class="input-group"><label>Soil Type (Swell %)</label><select id="sw-pct"><option value="0.12">Sand / Gravel (12%)</option><option value="0.25" selected>Standard Earth (25%)</option><option value="0.40">Hard Clay (40%)</option><option value="0.60">Blasted Rock (60%)</option></select></div></div>
+
+        <!-- USAGE TRACKERS -->
+        <div id="usage-display" class="usage-tracker"></div>
+
+        <div class="history-tape glass">
+            <div class="history-header"><h2>History Tape</h2></div>
+            <div id="history-list"></div>
+        </div>
+    </div>
+
+    <!-- BOTTOM NAVBAR -->
+    <nav class="bottom-nav glass">
+        <button class="nav-btn primary" data-action="pdf">
+            <svg viewBox="0 0 24 24"><path fill="none" d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline fill="none" points="14 2 14 8 20 8"></polyline><line fill="none" x1="12" y1="18" x2="12" y2="12"></line><polyline fill="none" points="9 15 12 18 15 15"></polyline></svg>
+            Save PDF
+        </button>
+        <button class="nav-btn primary" data-action="log">
+            <svg viewBox="0 0 24 24"><path fill="none" d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+            Log History
+        </button>
+        <button class="nav-btn" data-action="export">
+            <svg viewBox="0 0 24 24"><path fill="none" d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline fill="none" points="17 8 12 3 7 8"></polyline><line fill="none" x1="12" y1="3" x2="12" y2="15"></line></svg>
+            Export Logs
+        </button>
+    </nav>
+</body>
 </html>
