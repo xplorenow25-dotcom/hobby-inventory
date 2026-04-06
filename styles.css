@@ -1,4 +1,4 @@
-/* ========================================
+ /* ========================================
    PREMIUM "PRO TOOL" APPLE GLASSMORPHISM
    ======================================== */
 :root {
@@ -13,7 +13,14 @@
     --locked-gray: #4A4D55;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', system-ui, sans-serif; -webkit-tap-highlight-color: transparent; }
+* { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+    /* MANROPE FONT ADDED HERE */
+    font-family: 'Manrope', system-ui, sans-serif; 
+    -webkit-tap-highlight-color: transparent; 
+}
 
 body {
     background-color: var(--bg-dark);
@@ -53,12 +60,28 @@ body {
 .header-left { display: flex; align-items: center; gap: 12px; }
 .btn-icon { background: rgba(255,255,255,0.05); color: var(--brand-gold); border: 1px solid var(--glass-border); border-radius: 12px; font-size: 1.2rem; min-height: 48px; min-width: 48px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s ease; }
 .btn-icon:active { transform: scale(0.92); background: rgba(255,255,255,0.1); }
-.top-bar h1 { color: var(--text-main); font-size: 1.3rem; font-weight: 800; letter-spacing: 0.5px; }
-.top-bar h1 span { color: var(--brand-gold); }
-.pro-badge { display:none; background:var(--brand-gold); color:var(--bg-dark); font-size:0.6rem; font-weight:900; padding:2px 6px; border-radius:4px; margin-left:6px; vertical-align:middle; }
+.top-bar h1 { color: var(--text-main); font-size: 1.4rem; font-weight: 800; letter-spacing: 0.5px; }
+
+/* FIX FOR THE LOGO & BADGE */
+.top-bar h1 .text-gold { color: var(--brand-gold); }
+.pro-badge { 
+    display: none; /* Strictly hidden by default */
+    background: var(--brand-gold); 
+    color: var(--bg-dark); 
+    font-size: 0.65rem; 
+    font-weight: 800; 
+    padding: 3px 6px; 
+    border-radius: 4px; 
+    margin-left: 8px; 
+    vertical-align: middle; 
+    letter-spacing: 0.5px;
+}
+.pro-badge.show {
+    display: inline-block; /* Shows only when JS adds the 'show' class */
+}
 
 .unit-toggle { display: flex; background: rgba(0,0,0,0.4); border: 1px solid var(--glass-border); border-radius: 10px; padding: 4px; }
-.unit-toggle button { background: transparent; color: var(--text-muted); border: none; padding: 0 16px; font-weight: 600; font-size: 0.9rem; border-radius: 6px; min-height: 40px; cursor: pointer; transition: all 0.2s ease; }
+.unit-toggle button { background: transparent; color: var(--text-muted); border: none; padding: 0 16px; font-weight: 700; font-size: 0.9rem; border-radius: 6px; min-height: 40px; cursor: pointer; transition: all 0.2s ease; }
 .unit-toggle button.active { background: var(--brand-gold); color: var(--bg-dark); box-shadow: 0 2px 8px var(--brand-gold-glow); }
 
 /* --- VIEWS --- */
@@ -66,9 +89,9 @@ body {
 .view.active { display: block; animation: fadeSlideIn 0.35s ease forwards; }
 
 /* --- MENU --- */
-.category-title { color: var(--brand-gold); font-size: 0.9rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin: 25px 0 12px; padding-left: 5px; opacity: 0.9; }
+.category-title { color: var(--brand-gold); font-size: 0.9rem; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; margin: 25px 0 12px; padding-left: 5px; opacity: 0.9; }
 .menu-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
-.btn-menu { color: var(--text-main); border-radius: 16px; padding: 18px 20px; font-size: 1.15rem; font-weight: 600; text-align: left; box-shadow: 0 4px 15px rgba(0,0,0,0.2); cursor: pointer; display: flex; justify-content: space-between; transition: all 0.2s ease; }
+.btn-menu { color: var(--text-main); border-radius: 16px; padding: 18px 20px; font-size: 1.15rem; font-weight: 700; text-align: left; box-shadow: 0 4px 15px rgba(0,0,0,0.2); cursor: pointer; display: flex; justify-content: space-between; transition: all 0.2s ease; }
 .btn-menu:active { transform: scale(0.97); border-color: var(--brand-gold); background: rgba(245, 166, 35, 0.1); }
 .btn-menu.locked { color: var(--locked-gray); }
 .btn-menu.locked span { color: var(--locked-gray); }
@@ -76,7 +99,7 @@ body {
 /* --- CALCULATOR UI --- */
 .results-board { color: var(--brand-gold); padding: 24px 20px; border-radius: 20px; margin-bottom: 25px; position: relative; overflow: hidden; }
 .results-board h2 { font-size: 0.95rem; text-transform: uppercase; font-weight: 800; opacity: 0.9; letter-spacing: 1px; color: #fff; }
-.results-output { font-size: 2.8rem; font-weight: 900; line-height: 1.1; margin-top: 5px; transform-origin: left center; }
+.results-output { font-size: 2.8rem; font-weight: 800; line-height: 1.1; margin-top: 5px; transform-origin: left center; }
 .results-output.animating { animation: pulseResult 0.3s ease-out; }
 .results-sub { font-size: 1.1rem; font-weight: 700; margin-top: 8px; color: var(--text-main); opacity: 0.8; }
 
@@ -84,37 +107,37 @@ body {
 .calc-form.active { display: block; animation: fadeSlideIn 0.4s ease forwards; }
 
 .input-group { margin-bottom: 22px; }
-.input-group label { display: block; margin-bottom: 10px; font-size: 1.05rem; font-weight: 600; color: var(--text-main); opacity: 0.9; }
+.input-group label { display: block; margin-bottom: 10px; font-size: 1.05rem; font-weight: 700; color: var(--text-main); opacity: 0.9; }
 .unit-label { color: var(--brand-gold); }
 input, select { width: 100%; background: rgba(0,0,0,0.4); border: 1px solid var(--glass-border); color: var(--text-main); border-radius: 12px; padding: 14px; font-size: 1.2rem; font-weight: 600; transition: all 0.2s ease; }
 input:focus, select:focus { outline: none; border-color: var(--brand-gold); box-shadow: 0 0 0 3px var(--brand-gold-glow), inset 0 2px 4px rgba(0,0,0,0.5); background: rgba(0,0,0,0.6); }
 input::placeholder { color: #6B7280; font-weight: 500; font-size: 1.1rem; }
 
 /* --- BUTTONS & MODALS --- */
-.btn-action { background: rgba(255,255,255,0.05); color: var(--text-main); border: 1px solid var(--glass-border); border-radius: 14px; padding: 14px; font-size: 1.05rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer; transition: all 0.2s ease; }
+.btn-action { background: rgba(255,255,255,0.05); color: var(--text-main); border: 1px solid var(--glass-border); border-radius: 14px; padding: 14px; font-size: 1.05rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer; transition: all 0.2s ease; }
 .btn-action:active { transform: translateY(2px) scale(0.97); }
 .btn-action.primary { background: var(--brand-gold); color: var(--bg-dark); border: none; box-shadow: 0 4px 15px var(--brand-gold-glow); }
 
 .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 999; align-items: center; justify-content: center; backdrop-filter: blur(8px); animation: fadeIn 0.2s ease; }
 .modal-box { padding: 25px; border-radius: 20px; width: 90%; max-width: 400px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
-.modal-box h3 { color: var(--brand-gold); margin-bottom: 10px; font-size: 1.3rem; }
-.modal-box p { color: var(--text-main); opacity: 0.8; font-size: 0.95rem; margin-bottom: 15px; line-height:1.4; }
+.modal-box h3 { color: var(--brand-gold); margin-bottom: 10px; font-size: 1.4rem; font-weight: 800;}
+.modal-box p { color: var(--text-main); opacity: 0.8; font-size: 0.95rem; margin-bottom: 15px; line-height:1.4; font-weight: 500;}
 
 /* --- HISTORY TAPE --- */
 .history-tape { margin-top: 35px; padding: 20px; border-radius: 20px; }
 .history-header { border-bottom: 1px solid var(--glass-border); padding-bottom: 10px; margin-bottom: 15px; }
-.history-header h2 { font-size: 1rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+.history-header h2 { font-size: 1rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; font-weight: 800;}
 .history-item { padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
 .history-item:last-child { border-bottom: none; padding-bottom: 0; }
 .history-title { color: var(--text-main); font-size: 1.1rem; font-weight: 800; margin-bottom: 5px; }
-.history-subtitle { color: var(--brand-gold); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; margin-bottom: 5px; }
-.history-res { font-size: 1.2rem; font-weight: 600; color: var(--success-green); margin: 4px 0; }
+.history-subtitle { color: var(--brand-gold); font-size: 0.85rem; font-weight: 800; text-transform: uppercase; margin-bottom: 5px; }
+.history-res { font-size: 1.2rem; font-weight: 700; color: var(--success-green); margin: 4px 0; }
 
 /* --- BOTTOM NAVBAR --- */
 .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; border-top: 1px solid var(--glass-border); display: flex; justify-content: space-around; align-items: center; padding: 12px 5px; padding-bottom: env(safe-area-inset-bottom, 12px); z-index: 1000; box-shadow: 0 -10px 30px rgba(0,0,0,0.5); }
-.nav-btn { background: transparent; border: none; color: var(--text-muted); display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; flex: 1; text-transform: uppercase; letter-spacing: 0.5px; }
+.nav-btn { background: transparent; border: none; color: var(--text-muted); display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 0.8rem; font-weight: 800; cursor: pointer; transition: all 0.2s ease; flex: 1; text-transform: uppercase; letter-spacing: 0.5px; }
 .nav-btn.primary { color: var(--brand-gold); }
-.nav-btn svg { width: 24px; height: 24px; stroke: currentColor; stroke-width: 2; }
+.nav-btn svg { width: 24px; height: 24px; stroke: currentColor; stroke-width: 2.5; }
 .nav-btn:active { transform: scale(0.92); }
 
-.usage-tracker { font-size:0.85rem; color:var(--text-muted); text-align:center; margin-top:10px; }
+.usage-tracker { font-size:0.85rem; color:var(--text-muted); text-align:center; margin-top:10px; font-weight: 600;}
