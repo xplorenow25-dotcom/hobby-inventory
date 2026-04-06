@@ -4,16 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>DirtMath Pro</title>
-    <!-- Link to CSS -->
+    
+    <!-- Manrope Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="styles.css">
-    <!-- jsPDF for Advanced PDF Generation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <!-- Link to JS (defer ensures it loads after HTML) -->
     <script src="script.js" defer></script>
 </head>
 <body>
 
-    <!-- ANIMATED GLASSMORPHISM BACKGROUND -->
+    <!-- ANIMATED BACKGROUND -->
     <div class="bg-orbs">
         <div class="orb orb-1"></div>
         <div class="orb orb-2"></div>
@@ -23,7 +26,9 @@
     <header class="top-bar glass">
         <div class="header-left">
             <button class="btn-icon" id="btn-back" style="display:none;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></button>
-            <h1 id="app-title">Dirt<span>Math</span><span class="pro-badge" id="pro-badge">PRO</span></h1>
+            
+            <!-- FIXED LOGO AND PRO BADGE -->
+            <h1 id="app-title">Dirt<span class="text-gold">Math</span><span class="pro-badge" id="pro-badge">PRO</span></h1>
         </div>
         <div class="header-left">
             <div class="unit-toggle" id="unit-toggle-box"><button id="btn-metric">Metric</button><button id="btn-imperial" class="active">Imperial</button></div>
@@ -37,7 +42,7 @@
             <h3 style="font-size:1.5rem; text-align:center;">🛑 DirtMath PRO</h3>
             <p id="paywall-msg" style="text-align:center; color:#fff; font-weight:bold; margin-bottom:5px;">This is a Pro Tool.</p>
             <p style="text-align:center; margin-bottom:20px;">Stop arguing with clients over materials. Upgrade once, own it forever.</p>
-            <ul style="color:var(--text-muted); font-size:0.9rem; line-height:1.6; margin-bottom:20px; padding-left:20px;">
+            <ul style="color:var(--text-muted); font-size:0.95rem; line-height:1.6; margin-bottom:20px; padding-left:20px;">
                 <li>Unlimited PDF Estimates (Branded)</li>
                 <li>Unlimited History Logging</li>
                 <li>Unlock all 4 Pro Calculators</li>
@@ -107,7 +112,6 @@
     <div id="view-calc" class="view">
         <div class="results-board glass-gold"><h2 id="result-title">Result</h2><div class="results-output" id="primary-result">0.00</div><div class="results-sub" id="secondary-result">--</div></div>
         
-        <!-- FORMS -->
         <div id="form-prod" class="calc-form glass"><div class="input-group"><label>Bucket Cap <span class="unit-label lbl-vol"></span></label><input type="number" id="prod-cap" placeholder="e.g. 1.5"></div><div class="input-group"><label>Cycle Time (Sec)</label><input type="number" id="prod-cycle" placeholder="e.g. 20"></div><div class="input-group"><label>Efficiency</label><select id="prod-eff"><option value="1">100% Perfect</option><option value="0.8" selected>80% Standard</option><option value="0.6">60% Hard</option></select></div></div>
         <div id="form-bucket" class="calc-form glass"><div class="input-group"><label>Inside Width <span class="unit-label lbl-small"></span></label><input type="number" id="buc-w" placeholder="e.g. 36"></div><div class="input-group"><label>Inside Length <span class="unit-label lbl-small"></span></label><input type="number" id="buc-l" placeholder="e.g. 30"></div><div class="input-group"><label>Inside Depth <span class="unit-label lbl-small"></span></label><input type="number" id="buc-d" placeholder="e.g. 24"></div></div>
         <div id="form-fuel" class="calc-form glass"><div class="input-group"><label>Burn Rate <span class="unit-label lbl-liq-hr"></span></label><input type="number" id="fuel-rate" placeholder="e.g. 4"></div><div class="input-group"><label>Price per <span class="unit-label lbl-liq"></span></label><input type="number" id="fuel-price" placeholder="e.g. 3.50"></div><div class="input-group"><label>Hours Worked</label><input type="number" id="fuel-hrs" placeholder="e.g. 8"></div></div>
