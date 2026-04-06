@@ -17,7 +17,6 @@ const viewSettings = document.getElementById('view-settings');
 const btnBack = document.getElementById('btn-back');
 const btnSettings = document.getElementById('btn-settings');
 const unitToggleBox = document.getElementById('unit-toggle-box');
-const appTitle = document.getElementById('app-title');
 const primaryResult = document.getElementById('primary-result');
 const secondaryResult = document.getElementById('secondary-result');
 
@@ -92,7 +91,15 @@ function updateUIForPro() {
             else { btn.classList.add('locked'); btn.innerHTML = btn.innerHTML.replace('›', '🔒').replace('&#8250;', '🔒'); }
         }
     });
-    document.getElementById('pro-badge').style.display = isProUser ? 'inline-block' : 'none';
+
+    // Toggle the PRO badge safely using a class
+    const badge = document.getElementById('pro-badge');
+    if (isProUser) {
+        badge.classList.add('show');
+    } else {
+        badge.classList.remove('show');
+    }
+    
     updateUsageDisplay();
 }
 
@@ -108,13 +115,12 @@ function closePaywall() { document.getElementById('paywall-modal').style.display
 function testUnlockPro() { localStorage.setItem('dm_is_pro', 'true'); isProUser = true; closePaywall(); updateUIForPro(); alert("App Unlocked!"); }
 function resetApp() { localStorage.setItem('dm_is_pro', 'false'); isProUser=false; updateUIForPro(); goHome(); alert("App reset to Free mode."); }
 
-
 // --- NAVIGATION ---
 function hideAllViews() { viewHome.classList.remove('active'); viewCalc.classList.remove('active'); viewSettings.classList.remove('active'); }
 
 function openSettings() {
     hideAllViews(); activeCalcId = ''; viewSettings.classList.add('active'); 
-    btnBack.style.display = 'flex'; btnSettings.style.display = 'none'; unitToggleBox.style.display = 'none'; appTitle.innerHTML = 'Settings';
+    btnBack.style.display = 'flex'; btnSettings.style.display = 'none'; unitToggleBox.style.display = 'none';
 }
 
 function openCalc(calcId, calcName) {
@@ -126,7 +132,7 @@ function openCalc(calcId, calcName) {
     primaryResult.innerHTML = "0.00"; secondaryResult.innerText = "--";
 
     hideAllViews(); viewCalc.classList.add('active');
-    btnBack.style.display = 'flex'; btnSettings.style.display = 'flex'; unitToggleBox.style.display = 'flex'; appTitle.innerHTML = calcName;
+    btnBack.style.display = 'flex'; btnSettings.style.display = 'flex'; unitToggleBox.style.display = 'flex';
     
     document.querySelectorAll('.calc-form').forEach(f => f.classList.remove('active'));
     document.getElementById(`form-${calcId}`).classList.add('active');
@@ -135,7 +141,7 @@ function openCalc(calcId, calcName) {
 
 function goHome() {
     hideAllViews(); activeCalcId = ''; viewHome.classList.add('active');
-    btnBack.style.display = 'none'; btnSettings.style.display = 'flex'; unitToggleBox.style.display = 'flex'; appTitle.innerHTML = 'Dirt<span>Math</span>';
+    btnBack.style.display = 'none'; btnSettings.style.display = 'flex'; unitToggleBox.style.display = 'flex';
 }
 
 function saveSettings() {
@@ -178,6 +184,7 @@ function calculate() {
     else if (activeCalcId === 'weight') { let kg = isM ? val('wt-v') * val('wt-mat') : (val('wt-v')*0.7645) * val('wt-mat'); res1 = `${(isM ? kg/1000 : kg*0.00110231).toFixed(2)} ${isM ? 'Metric Tons' : 'Short Tons'}`; res2 = `${isM ? kg.toFixed(0)+' kg' : (kg*2.204).toFixed(0)+' lbs'}`; }
     else if (activeCalcId === 'swell') { const loose = val('sw-v') * (1 + parseFloat(document.getElementById('sw-pct').value)); res1 = `${loose.toFixed(2)} ${isM ? 'm³' : 'yd³'}`; res2 = `${(loose - val('sw-v')).toFixed(2)} extra expansion`; }
 
+    document.getElementById('result-title').innerText = activeCalcName;
     primaryResult.innerHTML = res1; secondaryResult.innerText = res2;
 }
 
