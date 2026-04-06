@@ -212,39 +212,26 @@ function confirmModal() {
     if(pendingAction === 'pdf') generatePDF(projName);
 }
 
-// --- EXPORT LOGS TO EXCEL (.CSV) ---
-function exportBackup() {
-    const historyStr = localStorage.getItem('tc_history'); 
-    if(!historyStr) { alert("No history to export."); return; }
-    
-    const history = JSON.parse(historyStr);
-    if(history.length === 0) { alert("No history to export."); return; }
-
-    // 1. Create Spreadsheet Headers
-    let csvContent = "Project Name,Calculator,Result,Details,Date & Time\n";
-
-    // 2. Loop through history and format for Excel
-    history.forEach(item => {
-        // We wrap each item in quotes so commas in the text don't break the spreadsheet columns
-        const proj = `"${item.proj.replace(/"/g, '""')}"`;
-        const title = `"${item.title.replace(/"/g, '""')}"`;
-        const res = `"${item.res.replace(/"/g, '""')}"`;
-        const sub = `"${item.sub.replace(/"/g, '""')}"`;
-        const time = `"${item.time.replace(/"/g, '""')}"`;
-        
-        csvContent += `${proj},${title},${res},${sub},${time}\n`;
-    });
-
-    // 3. Create the file and trigger download
-    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' }); 
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a'); 
-    a.href = url; 
-    
-    // Name the file as a .csv so it opens in Excel/Google Sheets
-    a.download = "DirtMath_Logs.csv"; 
-    a.click();
+// --- LOG HISTORY & EXPORT ---
+function saveToHistory(projName) {
+    const date = new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    let history = JSON.parse(localStorage.getItem('tc_history')) || [];
+    history.unshift({ proj: projName, title: activeCalcName, res: primaryResult.innerText, sub: secondaryResult.innerText, time: date });
+    if(history.length > 20) history.pop(); localStorage.setItem('tc_history', JSON.stringify(history)); renderHistory();
 }
+
+function renderHistory() {
+    const container = document.getElementById('history-list'); const history = JSON.parse(localStorage.getItem('tc_history')) || [];
+    if(history.length === 0) { container.innerHTML = "<div style='color:#6B7280;'>No history yet.</div>"; return; }
+    container.innerHTML = history.map(item => `<div class="history-item"><div class="history-title">${item.proj} <span style="float:right; color:#6B7280; font-size:0.85rem; font-weight:normal;">${item.time}</span></div><div class="history-subtitle">${item.title}</div><div class="history-res">${item.res}</div><div style="color:#A1A1AA; font-size:0.9rem;">${item.sub}</div></div>`).join('');
+}
+
+function exportBackup() {
+    const history = localStorage.getItem('tc_history'); if(!history) { alert("No history to export."); return; }
+    const blob = new Blob([history], { type: "application/json" }); const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href = url; a.download = "DirtMath_Logs.json"; a.click();
+}
+
 // --- PDF GENERATOR ---
 function generatePDF(projName) {
     if (!window.jspdf) { alert("PDF Library loading..."); return; }
