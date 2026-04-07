@@ -1,3 +1,82 @@
+// --- AUTHENTICATION SYSTEM (SIMULATED FOR NOW) ---
+let currentUser = localStorage.getItem('dm_current_user'); // Checks if user is logged in
+let isLoginMode = true; // Tracks if the screen is on Login or Sign Up
+
+document.addEventListener('DOMContentLoaded', () => {
+    // If user is already logged in, skip the login screen and go to the app
+    if (currentUser) {
+        document.getElementById('view-auth').classList.remove('active');
+        document.getElementById('view-home').classList.add('active');
+    } else {
+        // Hide the top and bottom bars if they are not logged in
+        document.querySelector('.top-bar').style.display = 'none';
+        document.querySelector('.bottom-nav').style.display = 'none';
+    }
+});
+
+function toggleAuthMode() {
+    isLoginMode = !isLoginMode;
+    const btn = document.querySelector('#login-form button');
+    const toggleText = document.querySelector('#login-form p');
+    
+    if (isLoginMode) {
+        btn.innerText = "Sign In";
+        toggleText.innerHTML = `Don't have an account? <span onclick="toggleAuthMode()" style="color: var(--brand-gold); cursor: pointer; font-weight: 700;">Create one</span>`;
+    } else {
+        btn.innerText = "Create Account";
+        toggleText.innerHTML = `Already have an account? <span onclick="toggleAuthMode()" style="color: var(--brand-gold); cursor: pointer; font-weight: 700;">Sign in</span>`;
+    }
+}
+
+function handleAuth(action) {
+    const email = document.getElementById('auth-email').value;
+    const pass = document.getElementById('auth-pass').value;
+
+    if (!email || !pass) {
+        alert("Please enter an email and password.");
+        return;
+    }
+
+    // SIMULATED LOGIN / SIGN UP
+    if (isLoginMode) {
+        // Pretend we are verifying with a server
+        console.log("Logging in...", email);
+    } else {
+        // Pretend we are creating an account on a server
+        console.log("Creating account...", email);
+    }
+
+    // Save the user session locally
+    localStorage.setItem('dm_current_user', email);
+    currentUser = email;
+
+    // Transition to the main app
+    document.getElementById('view-auth').classList.remove('active');
+    document.getElementById('view-home').classList.add('active');
+    
+    // Show the navigation bars again
+    document.querySelector('.top-bar').style.display = 'flex';
+    document.querySelector('.bottom-nav').style.display = 'flex';
+
+    // Clear the inputs for security
+    document.getElementById('auth-email').value = '';
+    document.getElementById('auth-pass').value = '';
+}
+
+function logoutUser() {
+    // Clear the session
+    localStorage.removeItem('dm_current_user');
+    currentUser = null;
+
+    // Hide app views and navs
+    hideAllViews();
+    document.querySelector('.top-bar').style.display = 'none';
+    document.querySelector('.bottom-nav').style.display = 'none';
+
+    // Show Auth view
+    document.getElementById('view-auth').classList.add('active');
+}
+
 // ========================================
 // DIRTMATH PRO - CORE LOGIC ENGINE
 // ========================================
